@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  prometheus:
+    build: .
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - coolify-observability
+    restart: unless-stopped
+
+networks:
+  coolify-observability:
+    external: true
