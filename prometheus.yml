@@ -33,10 +33,6 @@ scrape_configs:
         labels:
           service: 'cadvisor'
     metric_relabel_configs:
-      # 0) if Coolify specific label 'alias' is set, use it
-      - source_labels: [container_label_alias]
-        regex: (.+)
-        target_label: alias
       # 1) fallback: use Docker 'name' label for alias
       - source_labels: [name]
         regex: (.+)
