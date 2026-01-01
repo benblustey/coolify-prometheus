@@ -52,17 +52,19 @@ scrape_configs:
       - source_labels: [alias]
         regex: ""
         action: drop
+  # Node Exporter
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets:
+          - 'nodeexporter:9100'
+        labels:
+          service: 'node_exporter'
+  # Docker State Exporter
+  - job_name: 'docker-state-exporter'
+    static_configs:
+      - targets: [ 'docker_state_exporter:8085' ]
 
-  # # Node Exporter on each host
-  # - job_name: 'node_exporter'
-  #   static_configs:
-  #     - targets:
-  #         - 'localhost:9208'
-  #         - '10.255.0.4:9209'
-  #       labels:
-  #         service: 'node_exporter'
-
-  # # PostgreSQL exporter on each host
+  # PostgreSQL exporter on each host
   # - job_name: 'postgres_exporter'
   #   metrics_path: /metrics
   #   static_configs:

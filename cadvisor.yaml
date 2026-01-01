@@ -21,6 +21,28 @@ services:
       - '-store_container_labels=true'
     networks:
       - coolify-observability
+  docker_state_exporter:
+    image: karugaru/docker_state_exporter
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "8085:8080"
+    networks:
+      - coolify-observability
+  nodeexporter:
+    image: prom/node-exporter:latest
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --path.rootfs=/rootfs
+    networks:
+      - coolify-observability
 networks:
   coolify-observability:
     external: true
