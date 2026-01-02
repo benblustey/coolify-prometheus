@@ -9,9 +9,9 @@ services:
     networks:
       - coolify-observability
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./rules/:/etc/prometheus/rules/
-      - ./alerts/:/etc/prometheus/alerts/
+      # - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      # - ./rules/:/etc/prometheus/rules/
+      # - ./alerts/:/etc/prometheus/alerts/
       - ./data/:/prometheus/
     restart: unless-stopped
 
