@@ -21,26 +21,28 @@ services:
       - '-store_container_labels=true'
     networks:
       - coolify-observability
-  docker_container_exporter:
-    image: oriolrius/docker_container_exporter:latest
+  docker_state_exporter:
+    image: karugaru/docker_state_exporter
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - '/var/run/docker.sock:/var/run/docker.sock'
     ports:
-      - "8118:8118"
+      - '8118:8118'
     networks:
       - coolify-observability
+    environment:
+      DOCKER_API_VERSION: '1.52'
   nodeexporter:
-    image: prom/node-exporter:latest
+    image: 'prom/node-exporter:latest'
     ports:
-      - "9100:9100"
+      - '9100:9100'
     volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
+      - '/proc:/host/proc:ro'
+      - '/sys:/host/sys:ro'
+      - '/:/rootfs:ro'
     command:
-      - --path.procfs=/host/proc
-      - --path.sysfs=/host/sys
-      - --path.rootfs=/rootfs
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--path.rootfs=/rootfs'
     networks:
       - coolify-observability
 networks:
