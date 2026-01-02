@@ -60,10 +60,11 @@ scrape_configs:
         labels:
           service: 'node_exporter'
   # Docker State Exporter
-  - job_name: 'docker-state-exporter'
+  - job_name: 'docker_container_exporter'
     static_configs:
-      - targets: [ 'docker_state_exporter:8080' ]
-
+      - targets: ['docker_container_exporter:8118']
+        labels:
+          service: 'docker_container_exporter'
   # PostgreSQL exporter on each host
   # - job_name: 'postgres_exporter'
   #   metrics_path: /metrics

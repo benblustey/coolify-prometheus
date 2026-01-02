@@ -21,12 +21,12 @@ services:
       - '-store_container_labels=true'
     networks:
       - coolify-observability
-  docker_state_exporter:
-    image: karugaru/docker_state_exporter
+  docker_container_exporter:
+    image: oriolrius/docker_container_exporter:latest
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "8085:8080"
+      - "8118:8118"
     networks:
       - coolify-observability
   nodeexporter:
